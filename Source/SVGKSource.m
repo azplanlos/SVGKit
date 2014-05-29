@@ -2,6 +2,7 @@
 #import <SVGKit/SVGKSourceLocalFile.h>
 #import <SVGKit/SVGKSourceURL.h>
 #import <SVGKit/SVGKSourceData.h>
+#import <SVGKit/SVGKSourceString.h>
 #import "SVGKSource-private.h"
 
 @interface SVGKSource ()
@@ -31,13 +32,16 @@
 {
 	return [SVGKSourceURL sourceFromURL:u];
 }
+- (SVGKSource *)sourceFromRelativePath:(NSString *)path {
+    return nil;
+}
 
 + (SVGKSource*)sourceFromData:(NSData*)data {
 	return [SVGKSourceData sourceFromData:data];
 }
 
 + (SVGKSource*)sourceFromContentsOfString:(NSString*)rawString {
-	return [self sourceFromData:[rawString dataUsingEncoding:NSUTF8StringEncoding]];
+	return [SVGKSourceString sourceFromContentsOfString:rawString];
 }
 
 - (id)copyWithZone:(NSZone *)zone

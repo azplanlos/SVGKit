@@ -28,6 +28,8 @@
 #else
 #define SVGKCreateSystemDefaultSpace() CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB)
 #endif
+#import "CALayer+RecursiveClone.h"
+
 
 @interface SVGKImage ()
 
@@ -379,7 +381,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-	SVGKSource *copySource = nil;
+	SVGKSource *copySource;
 	if (!(copySource = [self.source copyWithZone:zone]))
 	{
 		DDLogError(@"[%@] ERROR: Unable to copy %@, unable to copy %@ from %@", [self class], self, [self.source class], self.source);
@@ -489,8 +491,13 @@
 
 -(CALayer*) newCopyPositionedAbsoluteOfLayer:(CALayer *)originalLayer
 {
+	return [self newCopyPositionedAbsoluteOfLayer:originalLayer withSubLayers:FALSE];
+}
+
+-(CALayer*) newCopyPositionedAbsoluteOfLayer:(CALayer *)originalLayer withSubLayers:(BOOL) recursive
+{
 	
-	CALayer* clonedLayer = [[[originalLayer class] alloc] init];
+	/*CALayer* clonedLayer = [[[originalLayer class] alloc] init];
 	
 	clonedLayer.frame = originalLayer.frame;
 	if( [originalLayer isKindOfClass:[CAShapeLayer class]] )
@@ -500,7 +507,9 @@
 		((CAShapeLayer*)clonedLayer).lineWidth = ((CAShapeLayer*)originalLayer).lineWidth;
 		((CAShapeLayer*)clonedLayer).strokeColor = ((CAShapeLayer*)originalLayer).strokeColor;
 		((CAShapeLayer*)clonedLayer).fillColor = ((CAShapeLayer*)originalLayer).fillColor;
-	}
+	}*/
+	
+	CALayer* clonedLayer = recursive ? [originalLayer cloneRecursively] : [originalLayer cloneShallow];
 	
 	if( clonedLayer == nil )
 		return nil;
@@ -631,7 +640,7 @@
 
 static inline NSString *exceptionInfo(NSException *e)
 {
-	NSString *debugStr = nil;
+	NSString *debugStr;
 #if 0
 	debugStr = [NSString stringWithFormat:@", call stack: %@", [NSDictionary dictionaryWithObjects:e.callStackReturnAddresses forKeys:e.callStackSymbols]];
 #else
@@ -800,7 +809,7 @@ return; \
 	CGColorSpaceRef colorSpace = SVGKCreateSystemDefaultSpace();
 	CGFloat ceilWidth = ceilCG(self.size.width);
 	CGFloat ceilHeight = ceilCG(self.size.height);
-	CGContextRef context = CGBitmapContextCreate( NULL/*malloc( self.size.width * self.size.height * 4 )*/, ceilWidth, ceilHeight, 8, 4 * ceilWidth, colorSpace, kCGImageAlphaNoneSkipLast );
+	CGContextRef context = CGBitmapContextCreate( NULL/*malloc( self.size.width * self.size.height * 4 )*/, ceilWidth, ceilHeight, 8, 4 * ceilWidth, colorSpace, (CGBitmapInfo)kCGImageAlphaNoneSkipLast );
 	CGColorSpaceRelease( colorSpace );
 	
 	[self renderToContext:context antiAliased:shouldAntialias curveFlatnessFactor:multiplyFlatness interpolationQuality:interpolationQuality flipYaxis: flipYaxis];
@@ -858,7 +867,7 @@ return; \
 	
 	DDLogVerbose(@"[%@] DEBUG: Generating a CIImage using the current root-object's viewport (may have been overridden by user code): {0,0,%2.3f,%2.3f}", [self class], self.size.width, self.size.height);
 	
-	CIImage *result = nil;
+	CIImage *result;
 	CGImageRef theRef = [imRep CGImage];
 	if (theRef) {
 		result = [CIImage imageWithCGImage:theRef];

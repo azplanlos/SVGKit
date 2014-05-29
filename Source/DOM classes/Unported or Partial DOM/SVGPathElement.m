@@ -56,7 +56,7 @@
 																	   path:path
 																 relativeTo:lastCoordinate];
             } else {
-                NSString* cmdArgs = nil;
+                NSString* cmdArgs;
                 BOOL foundParameters = [dataScanner scanUpToCharactersFromSet:knownCommands
                                                                    intoString:&cmdArgs];
                 
@@ -143,6 +143,18 @@
 																					 path:path
 																			   relativeTo:CGPointZero
 																			   isRelative:FALSE];
+                        lastCoordinate = lastCurve.p;
+					} else if ([@"t" isEqualToString:command]) {
+                        lastCurve = [SVGKPointsAndPathsParser readSmoothQuadraticCurvetoCommand:commandScanner
+																				  path:path
+																			relativeTo:lastCoordinate
+																		 withPrevCurve:lastCurve];
+                        lastCoordinate = lastCurve.p;
+                    } else if ([@"T" isEqualToString:command]) {
+                        lastCurve = [SVGKPointsAndPathsParser readSmoothQuadraticCurvetoCommand:commandScanner
+																				  path:path
+																			relativeTo:CGPointZero
+																		 withPrevCurve:lastCurve];
                         lastCoordinate = lastCurve.p;
                     } else {
                         DDLogWarn(@"unsupported command %@", command);
