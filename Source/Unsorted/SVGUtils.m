@@ -454,10 +454,10 @@ CGColorRef CGColorWithSVGColor (SVGColor color) {
 	}
     
     if (outColor == NULL) {
-		outColor = (CGColorRef)CFAutorelease(CGColorCreateGenericRGB(RGB_N(color.r),
+		outColor = (CGColorRef)CGColorCreateGenericRGB(RGB_N(color.r),
 																	 RGB_N(color.g),
 																	 RGB_N(color.b),
-																	 RGB_N(color.a)));
+																	 RGB_N(color.a));
 	}
 #endif
 	

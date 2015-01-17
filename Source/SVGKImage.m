@@ -110,7 +110,7 @@
 	
 	/** Second, try to find it in the Documents folder (this is where Apple expects you to store custom files at runtime) */
 	NSString* pathToFileInDocumentsFolder = nil;
-	NSString* pathToDocumentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+	NSString* pathToDocumentsFolder = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	if( pathToDocumentsFolder != nil )
 	{
 		pathToFileInDocumentsFolder = [[pathToDocumentsFolder stringByAppendingPathComponent:newName] stringByAppendingPathExtension:extension];

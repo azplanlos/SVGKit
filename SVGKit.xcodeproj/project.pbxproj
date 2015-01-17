@@ -744,6 +744,9 @@
 		55F2686219B66C8E00F6410E /* TinySVGTextAreaElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F2686019B66C8E00F6410E /* TinySVGTextAreaElement.m */; };
 		55F2686319B66C8E00F6410E /* TinySVGTextAreaElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F2686019B66C8E00F6410E /* TinySVGTextAreaElement.m */; };
 		55F3267A178156770064271D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F32679178156770064271D /* QuartzCore.framework */; };
+		A9D6D2601A69A9970099A573 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D6D25F1A69A9970099A573 /* CoreText.framework */; };
+		A9D6D2A91A69B1900099A573 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D6D2631A69A9B50099A573 /* CoreGraphics.framework */; };
+		A9D6D2AB1A69B20E0099A573 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D6D2AA1A69B20E0099A573 /* ApplicationServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1265,6 +1268,11 @@
 		55F2686019B66C8E00F6410E /* TinySVGTextAreaElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TinySVGTextAreaElement.m; sourceTree = "<group>"; };
 		55F32679178156770064271D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		55F3267B178156EF0064271D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		A9D6D25F1A69A9970099A573 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A9D6D2611A69A9AA0099A573 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		A9D6D2631A69A9B50099A573 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A9D6D2A71A69B16E0099A573 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		A9D6D2AA1A69B20E0099A573 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		D3E1A8F41A3E224600813D88 /* Lumberjack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Lumberjack.xcodeproj; path = CocoaLumberjack/Framework/Desktop/Lumberjack.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1288,9 +1296,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9D6D2AB1A69B20E0099A573 /* ApplicationServices.framework in Frameworks */,
+				A9D6D2A91A69B1900099A573 /* CoreGraphics.framework in Frameworks */,
+				55F3267A178156770064271D /* QuartzCore.framework in Frameworks */,
+				A9D6D2601A69A9970099A573 /* CoreText.framework in Frameworks */,
 				5564276D1A4B98A1006A7269 /* CocoaLumberjack.framework in Frameworks */,
 				55C361A5178212F800BA24FA /* libxml2.dylib in Frameworks */,
-				55F3267A178156770064271D /* QuartzCore.framework in Frameworks */,
 				55C361A11782102900BA24FA /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1345,6 +1356,11 @@
 		5540E66217387C9E004029EF = {
 			isa = PBXGroup;
 			children = (
+				A9D6D2AA1A69B20E0099A573 /* ApplicationServices.framework */,
+				A9D6D2A71A69B16E0099A573 /* CoreServices.framework */,
+				A9D6D2631A69A9B50099A573 /* CoreGraphics.framework */,
+				A9D6D2611A69A9AA0099A573 /* Quartz.framework */,
+				A9D6D25F1A69A9970099A573 /* CoreText.framework */,
 				5540E67517387C9F004029EF /* SVGKit */,
 				5586007C17851F7000CB3D85 /* Documentation */,
 				55A5AD4A175FEBB0009F2FDD /* Vendor */,
@@ -2916,6 +2932,7 @@
 		5540E68217387C9F004029EF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2934,6 +2951,7 @@
 				INFOPLIST_FILE = "XCodeProjectData/SVGKit-OSX/SVGKit-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MODULEMAP_FILE = "XCodeProjectData/SVGKit-OSX/SVGKit.modulemap";
 				PRODUCT_NAME = SVGKit;
 				WRAPPER_EXTENSION = framework;
@@ -2943,6 +2961,7 @@
 		5540E68317387C9F004029EF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2961,6 +2980,7 @@
 				INFOPLIST_FILE = "XCodeProjectData/SVGKit-OSX/SVGKit-Info.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MODULEMAP_FILE = "XCodeProjectData/SVGKit-OSX/SVGKit.modulemap";
 				PRODUCT_NAME = SVGKit;
 				WRAPPER_EXTENSION = framework;
